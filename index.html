@@ -72,7 +72,7 @@
       const status = document.querySelector("#status");
       const positions = document.querySelector("#positions");
       const text = document.querySelector("#text");
-
+      const treasure = document.querySelector("#treasure");
       function success(position) {
         console.log(text.getAttribute("gps-entity-place"));
         console.log(position);
@@ -88,7 +88,10 @@
           "gps-entity-place",
           `latitude:${modellatitude}; longitude:${modellongitude};`
         );
-
+        treasure.setAttribute(
+          "gps-entity-place",
+          `latitude:${latitude}; longitude:${longitude};`
+        );
         console.log(text.getAttribute("gps-entity-place"));
         status.textContent = "";
       }
