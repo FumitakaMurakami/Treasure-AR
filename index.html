@@ -87,6 +87,8 @@
         console.log(randomlatitude);
         let modellatitude = latitude + randomlatitude;
         let modellongitude = longitude + randomlongitude;
+        let treasurelatitude = latitude + 0.001;
+        let treasurelongitude = longitude + randomlongitude;
         console.log(modellatitude, modellongitude);
         text.setAttribute(
           "gps-entity-place",
@@ -94,7 +96,7 @@
         );
         treasure.setAttribute(
           "gps-entity-place",
-          `latitude:${latitude}; longitude:${longitude};`
+          `latitude:${treasurelatitude}; longitude:${longitude};`
         );
         console.log(text.getAttribute("gps-entity-place"));
         status.textContent = "";
