@@ -21,13 +21,39 @@
         color: white;
         font-size: 1em;
       }
+      .buttons {
+        color: white;
+        position: absolute;
+        height: 80px;
+        width: 120px;
+        z-index: -9999;
+        bottom: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .startbutton {
+        color: white;
+        position: absolute;
+        height: 80px;
+        width: 120px;
+        z-index: -9999;
+        bottom: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     </style>
   </head>
 
   <body style="margin: 0; overflow: hidden">
     <div id="status"></div>
     <div id="positions"></div>
-
+    <div class="loader" id="info">
+      <button class="buttons" type="button" id="button1" onclick="moveLink()">
+        宝を開ける
+      </button>
+    </div>
     <a-scene
       vr-mode-ui="enabled: false"
       gps-camera-debug
@@ -56,13 +82,9 @@
     </a-scene>
   </body>
   <script>
-    AFRAME.registerComponent("moveLink", {
-      init: function () {
-        this.el.addEventListener("click", async function (evt) {
-          window.location.href = "https://yakkun.com/swsh/zukan/n271";
-        });
-      },
-    });
+    function moveLink() {
+      window.location.href = "https://yakkun.com/swsh/zukan/n271";
+    }
     function getRandomArbitrary(min, max) {
       return Math.random() * (max - min) + min;
     }
@@ -131,6 +153,7 @@
       const positions = document.querySelector("#positions");
       const treasure = document.querySelector("#treasure");
       const text = document.querySelector("#text");
+      const b1 = document.getElementById("button1");
       function success(position) {
         console.log(text.getAttribute("gps-entity-place"));
         let modellatitude = treasure.getAttribute("gps-entity-place").latitude;
@@ -149,6 +172,8 @@
           } else {
             treasure.setAttribute("opacity", `1`);
             treasure.setAttribute("color", `black`);
+            b1.classList.remove("after-buttons");
+            b1.classList.toggle("load-buttons");
           }
         } else {
           treasure.setAttribute("opacity", `0`);
