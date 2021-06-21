@@ -171,8 +171,8 @@
         const pointDistance = Math.round(
           distance(modellatitude, modellongitude, latitude, longitude) * 1000
         );
-        if (pointDistance <= 30) {
-          if (pointDistance <= 10) {
+        if (pointDistance <= 50) {
+          if (pointDistance <= 20) {
             treasure.setAttribute("opacity", `1`);
             treasure.setAttribute("color", `red`);
             b1.classList.remove("buttons");
