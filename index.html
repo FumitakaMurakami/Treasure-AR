@@ -26,11 +26,12 @@
         position: absolute;
         height: 80px;
         width: 120px;
-        z-index: -9999;
+        z-index: 9999;
         bottom: 0px;
         display: flex;
         justify-content: center;
         align-items: center;
+        left: 140px;
       }
       .after-buttons {
         color: white;
@@ -42,6 +43,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        left: 140px;
       }
     </style>
   </head>
@@ -49,7 +51,7 @@
   <body style="margin: 0; overflow: hidden">
     <div id="status"></div>
     <div id="positions"></div>
-    <div>
+    <div class="loader">
       <button class="buttons" type="button" id="button1" onclick="moveLink()">
         宝を開ける
       </button>
