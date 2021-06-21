@@ -39,6 +39,7 @@
         color="red"
         scale="1 1 1"
         look-at="&#91;gps-camera&#93;"
+        moveLink
       ></a-box>
       <a-text
         id="text"
@@ -46,10 +47,22 @@
         look-at="&#91;gps-camera&#93;"
         scale="120 120 120"
       ></a-text>
-      <a-camera gps-camera="maxDistance:100" rotation-reader> </a-camera>
+      <a-camera
+        gps-camera="maxDistance:100"
+        cursor="rayOrigin: mouse; fuse:false"
+        rotation-reader
+      >
+      </a-camera>
     </a-scene>
   </body>
   <script>
+    AFRAME.registerComponent("moveLink", {
+      init: function () {
+        this.el.addEventListener("click", async function (evt) {
+          window.location.href = "https://yakkun.com/swsh/zukan/n271";
+        });
+      },
+    });
     function getRandomArbitrary(min, max) {
       return Math.random() * (max - min) + min;
     }
