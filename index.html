@@ -118,10 +118,6 @@
         const pointDistance = Math.round(
           distance(modellatitude, modellongitude, latitude, longitude) * 1000
         );
-
-        const Ala = text1.getAttribute("gps-entity-place").latitude - latitude;
-
-        const Bla = text2.getAttribute("gps-entity-place").latitude - latitude;
         const Blo = (positions.innerHTML =
           "<div>latitude:" +
           latitude +
