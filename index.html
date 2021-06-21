@@ -47,19 +47,12 @@
         look-at="&#91;gps-camera&#93;"
         scale="120 120 120"
       ></a-text>
-      <!-- <a-camera
+      <a-camera
         gps-camera="maxDistance:100"
         cursor="rayOrigin: mouse; fuse:false"
         rotation-reader
       >
-      </a-camera> -->
-      <a-entity camera
-        ><a-entity
-          gps-camera="maxDistance:100"
-          cursor="rayOrigin: mouse; fuse:false"
-          material="color: black; shader: flat"
-        ></a-entity>
-      </a-entity>
+      </a-camera>
     </a-scene>
   </body>
   <script>
@@ -107,7 +100,7 @@
         console.log(randomlatitude);
         let modellatitude = latitude + randomlatitude;
         let modellongitude = longitude + randomlongitude;
-        /* let treasurelatitude = latitude + 0.0001; */
+        let treasurelatitude = latitude + 0.0001;
         let treasurelongitude = longitude + randomlongitude;
         console.log(modellatitude, modellongitude);
         text.setAttribute(
@@ -116,7 +109,7 @@
         );
         treasure.setAttribute(
           "gps-entity-place",
-          `latitude:${latitude}; longitude:${longitude};`
+          `latitude:${treasurelatitude}; longitude:${longitude};`
         );
         console.log(text.getAttribute("gps-entity-place"));
         status.textContent = "";
@@ -149,8 +142,8 @@
         const pointDistance = Math.round(
           distance(modellatitude, modellongitude, latitude, longitude) * 1000
         );
-        if (pointDistance <= 50) {
-          if (pointDistance <= 20) {
+        if (pointDistance <= 30) {
+          if (pointDistance <= 10) {
             treasure.setAttribute("opacity", `1`);
             treasure.setAttribute("color", `red`);
           } else {
@@ -161,7 +154,7 @@
           treasure.setAttribute("opacity", `0`);
         }
         const Blo = (positions.innerHTML =
-          "<div>宝までの距離" + pointDistance + "m" + "</div>");
+          "<div>モデルまでの距離" + pointDistance + "m" + "</div>");
       }
 
       function error() {
