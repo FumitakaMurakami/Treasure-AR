@@ -46,18 +46,6 @@
         look-at="&#91;gps-camera&#93;"
         scale="120 120 120"
       ></a-text>
-      <a-text
-        id="text1"
-        value="A"
-        look-at="&#91;gps-camera&#93;"
-        scale="120 120 120"
-      ></a-text>
-      <a-text
-        id="text2"
-        value="B"
-        look-at="&#91;gps-camera&#93;"
-        scale="120 120 120"
-      ></a-text>
       <a-camera gps-camera="maxDistance:100" rotation-reader> </a-camera>
     </a-scene>
   </body>
@@ -84,8 +72,7 @@
       const status = document.querySelector("#status");
       const positions = document.querySelector("#positions");
       const text = document.querySelector("#text");
-      const text1 = document.querySelector("#text1");
-      const text2 = document.querySelector("#text2");
+
       function success(position) {
         console.log(text.getAttribute("gps-entity-place"));
         console.log(position);
@@ -101,14 +88,7 @@
           "gps-entity-place",
           `latitude:${modellatitude}; longitude:${modellongitude};`
         );
-        text1.setAttribute(
-          "gps-entity-place",
-          `latitude:${latitude + 0.001}; longitude:${longitude};`
-        );
-        text2.setAttribute(
-          "gps-entity-place",
-          `latitude:${latitude - 0.001}; longitude:${longitude};`
-        );
+
         console.log(text.getAttribute("gps-entity-place"));
         status.textContent = "";
       }
@@ -128,10 +108,6 @@
       const status = document.querySelector("#status");
       const positions = document.querySelector("#positions");
       const text = document.querySelector("#text");
-      const text1 = document.querySelector("#text1");
-      const text2 = document.querySelector("#text2");
-      const A = document.querySelector("#A");
-      const B = document.querySelector("#B");
       function success(position) {
         console.log(text.getAttribute("gps-entity-place"));
         let modellatitude = text.getAttribute("gps-entity-place").latitude;
@@ -142,23 +118,11 @@
         const pointDistance = Math.round(
           distance(modellatitude, modellongitude, latitude, longitude) * 1000
         );
-        text1.setAttribute(
-          "gps-entity-place",
-          `latitude:${latitude + 0.0005}; longitude:${longitude};`
-        );
 
-        text2.setAttribute(
-          "gps-entity-place",
-          `latitude:${latitude - 0.0005}; longitude:${longitude};`
-        );
         const Ala = text1.getAttribute("gps-entity-place").latitude - latitude;
-        const Alo =
-          text1.getAttribute("gps-entity-place").longitude - longitude;
+
         const Bla = text2.getAttribute("gps-entity-place").latitude - latitude;
-        const Blo =
-          text2.getAttribute("gps-entity-place").longitude - longitude;
-        status.textContent = "";
-        positions.innerHTML =
+        const Blo = (positions.innerHTML =
           "<div>latitude:" +
           latitude +
           " longitude:" +
@@ -170,15 +134,7 @@
           "<br>モデルまでの距離" +
           pointDistance +
           "m" +
-          "<br>A " +
-          Ala +
-          " " +
-          Alo +
-          "<br>B " +
-          Bla +
-          " " +
-          Blo +
-          "</div>";
+          "</div>");
       }
 
       function error() {
