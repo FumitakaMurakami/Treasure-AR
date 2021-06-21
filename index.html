@@ -128,18 +128,7 @@
           distance(modellatitude, modellongitude, latitude, longitude) * 1000
         );
         const Blo = (positions.innerHTML =
-          "<div>latitude:" +
-          latitude +
-          " longitude:" +
-          longitude +
-          "<br>modellatitude:" +
-          modellatitude +
-          " modellongitude:" +
-          modellongitude +
-          "<br>モデルまでの距離" +
-          pointDistance +
-          "m" +
-          "</div>");
+          "<div>モデルまでの距離" + pointDistance + "m" + "</div>");
       }
 
       function error() {
