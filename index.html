@@ -129,6 +129,9 @@
         const pointDistance = Math.round(
           distance(modellatitude, modellongitude, latitude, longitude) * 1000
         );
+        if (pointDistance <= 30) {
+          treasure.setAttribute("color", `black`);
+        }
         const Blo = (positions.innerHTML =
           "<div>モデルまでの距離" + pointDistance + "m" + "</div>");
       }
