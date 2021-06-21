@@ -47,17 +47,19 @@
         look-at="&#91;gps-camera&#93;"
         scale="120 120 120"
       ></a-text>
-      <a-camera
+      <!-- <a-camera
         gps-camera="maxDistance:100"
         cursor="rayOrigin: mouse; fuse:false"
         rotation-reader
       >
-      </a-camera>
+      </a-camera> -->
       <a-entity camera
-      ><a-entity
-        cursor="rayOrigin: mouse; fuse:false"
-        material="color: black; shader: flat"
-      ></a-entity>
+        ><a-entity
+          gps-camera="maxDistance:100"
+          cursor="rayOrigin: mouse; fuse:false"
+          material="color: black; shader: flat"
+        ></a-entity>
+      </a-entity>
     </a-scene>
   </body>
   <script>
@@ -147,8 +149,8 @@
         const pointDistance = Math.round(
           distance(modellatitude, modellongitude, latitude, longitude) * 1000
         );
-        if (pointDistance <= 30) {
-          if (pointDistance <= 10) {
+        if (pointDistance <= 50) {
+          if (pointDistance <= 20) {
             treasure.setAttribute("opacity", `1`);
             treasure.setAttribute("color", `red`);
           } else {
