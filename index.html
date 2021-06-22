@@ -158,7 +158,6 @@
       const positions = document.querySelector("#positions");
       const treasure = document.querySelector("#treasure");
       const text = document.querySelector("#text");
-      const b1 = document.getElementById("button1");
       function success(position) {
         console.log(text.getAttribute("gps-entity-place"));
         let modellatitude = treasure.getAttribute("gps-entity-place").latitude;
@@ -172,6 +171,7 @@
         );
         if (pointDistance <= 50) {
           if (pointDistance <= 20) {
+            const b1 = document.getElementById("button1");
             treasure.setAttribute("opacity", `1`);
             treasure.setAttribute("color", `red`);
             console.log(b1.classList);
