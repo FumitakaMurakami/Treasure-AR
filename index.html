@@ -152,14 +152,14 @@
 
         let treasurelatitude = latitude + randomlongitude;
         let treasurelongitude = longitude + randomlongitude;
-        treasure.setAttribute(
-          "gps-entity-place",
-          `latitude:${latitude}; longitude:${longitude};`
-        );
         /* treasure.setAttribute(
           "gps-entity-place",
-          `latitude:${treasurelatitude}; longitude:${treasurelongitude};`
+          `latitude:${latitude}; longitude:${longitude};`
         ); */
+        treasure.setAttribute(
+          "gps-entity-place",
+          `latitude:${treasurelatitude}; longitude:${treasurelongitude};`
+        );
 
         status.textContent = "";
       }
@@ -201,13 +201,13 @@
           } else {
             treasure.setAttribute("opacity", `1`);
             treasure.setAttribute("color", `black`);
-            b1.classList.remove("buttons");
-            b1.classList.toggle("after-buttons");
+            b1.classList.remove("after-buttons");
+            b1.classList.toggle("buttons");
           }
         } else {
           treasure.setAttribute("opacity", `0`);
-          /* b1.classList.remove("after-buttons");
-          b1.classList.toggle("buttons"); */
+          b1.classList.remove("after-buttons");
+          b1.classList.toggle("buttons");
         }
         const Blo = (positions.innerHTML =
           "<div>モデルまでの距離" + pointDistance + "m" + "</div>");
