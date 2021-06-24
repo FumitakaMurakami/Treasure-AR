@@ -56,7 +56,12 @@
     <div id="status"></div>
     <div id="positions"></div>
     <div>
-      <button class="buttons" type="button" id="button1" onclick="moveLink()">
+      <button
+        class="buttons"
+        type="button"
+        id="button1"
+        onclick=" treasureFound()"
+      >
         宝を開ける
       </button>
     </div>
@@ -88,8 +93,35 @@
     </a-scene>
   </body>
   <script>
-    function moveLink() {
-      window.location.href = "https://yakkun.com/swsh/zukan/n271";
+    function run(id) {
+      console.log("#" + id);
+      const mid = "#" + id;
+      var entity = document.querySelector(mid);
+
+      var test = {
+        posX: 0,
+        posY: 0,
+      };
+
+      anime({
+        targets: test,
+        posY: 2,
+        posX: 0,
+        elasticity: 10000,
+        update: function () {
+          entity.setAttribute("position", {
+            x: 0,
+            y: test.posY,
+            z: -4,
+          });
+        },
+        duration: 800,
+        direction: "alternate",
+        loop: 1,
+      });
+    }
+    function treasureFound() {
+      run("button1");
     }
     function getRandomArbitrary(min, max) {
       return Math.random() * (max - min) + min;
@@ -116,28 +148,20 @@
     function geoSetup() {
       const status = document.querySelector("#status");
       const positions = document.querySelector("#positions");
-      const text = document.querySelector("#text");
       const treasure = document.querySelector("#treasure");
       function success(position) {
-        console.log(text.getAttribute("gps-entity-place"));
-        console.log(position);
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
-        randomlatitude = getRandomArbitrary(0.0001, 0.001);
-        randomlongitude = getRandomArbitrary(0.0001, 0.001);
-        console.log(randomlatitude);
-        let modellatitude = latitude + randomlatitude;
-        let modellongitude = longitude + randomlongitude;
-        let treasurelatitude = latitude + 0.0001;
+        randomlatitude = getRandomArbitrary(0.0005, 0.001);
+        randomlongitude = getRandomArbitrary(0.0005, 0.001);
+
+        let treasurelatitude = latitude + randomlongitude;
         let treasurelongitude = longitude + randomlongitude;
         console.log(modellatitude, modellongitude);
-        text.setAttribute(
-          "gps-entity-place",
-          `latitude:${modellatitude}; longitude:${modellongitude};`
-        );
+
         treasure.setAttribute(
           "gps-entity-place",
-          `latitude:${latitude}; longitude:${longitude};`
+          `latitude:${treasurelatitude}; longitude:${treasurelongitude};`
         );
         console.log(text.getAttribute("gps-entity-place"));
         status.textContent = "";
