@@ -90,6 +90,7 @@ function geoFindMe() {
   const positions = document.querySelector("#positions");
   const treasure = document.querySelector("#treasure");
   const b1 = document.querySelector("#button1");
+  console.log(b1);
   function success(position) {
     let modellatitude = treasure.getAttribute("gps-entity-place").latitude;
     let modellongitude = treasure.getAttribute("gps-entity-place").longitude;
