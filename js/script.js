@@ -93,7 +93,7 @@ function geoFindMe() {
   function success(position) {
     let modellatitude = treasure.getAttribute("gps-entity-place").latitude;
     let modellongitude = treasure.getAttribute("gps-entity-place").longitude;
-    console.log(position);
+    console.log(modellatitude, modellongitude);
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
     const pointDistance = Math.round(
