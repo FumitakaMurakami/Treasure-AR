@@ -126,8 +126,8 @@ function geoFindMe() {
       }
     } else {
       treasure.setAttribute("opacity", `0`);
-      b1.classList.remove("after-buttons");
-      b1.classList.toggle("buttons");
+      /* b1.classList.remove("after-buttons");
+      b1.classList.toggle("buttons"); */
       const Blo = (positions.innerHTML =
         "<div>モデルまでの距離" + pointDistance + "m" + "</div>");
     }
