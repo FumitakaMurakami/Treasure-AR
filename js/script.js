@@ -109,16 +109,6 @@ function geoFindMe() {
         console.log(b1);
         /* b1.classList.remove("buttons");
         b1.classList.toggle("after-buttons"); */
-        const Blo = (positions.innerHTML =
-          "<div>モデルまでの距離" +
-          pointDistance +
-          "m" +
-          "<br>宝に近づいています！</div>");
-      } else {
-        treasure.setAttribute("opacity", `1`);
-        treasure.setAttribute("color", `black`);
-        /* b1.classList.remove("after-buttons");
-        b1.classList.toggle("buttons"); */
         const getButton = (getbutton.innerHTML = `<button
           class="buttons"
           type="button"
@@ -132,6 +122,16 @@ function geoFindMe() {
           pointDistance +
           "m" +
           "<br>宝を発見しました！</div>");
+      } else {
+        treasure.setAttribute("opacity", `1`);
+        treasure.setAttribute("color", `black`);
+        /* b1.classList.remove("after-buttons");
+        b1.classList.toggle("buttons"); */
+        const Blo = (positions.innerHTML =
+          "<div>モデルまでの距離" +
+          pointDistance +
+          "m" +
+          "<br>宝に近づいています！</div>");
       }
     } else {
       treasure.setAttribute("opacity", `0`);
