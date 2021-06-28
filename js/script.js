@@ -127,6 +127,7 @@ function geoFindMe() {
         treasure.setAttribute("color", `black`);
         /* b1.classList.remove("after-buttons");
         b1.classList.toggle("buttons"); */
+        const getButton = (getbutton.innerHTML = ``);
         const Blo = (positions.innerHTML =
           "<div>モデルまでの距離" +
           pointDistance +
@@ -137,6 +138,7 @@ function geoFindMe() {
       treasure.setAttribute("opacity", `0`);
       /* b1.classList.remove("after-buttons");
       b1.classList.toggle("buttons"); */
+      const getButton = (getbutton.innerHTML = ``);
       const Blo = (positions.innerHTML =
         "<div>モデルまでの距離" + pointDistance + "m" + "</div>");
     }
