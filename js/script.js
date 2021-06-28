@@ -119,8 +119,7 @@ function geoFindMe() {
         treasure.setAttribute("color", `black`);
         /* b1.classList.remove("after-buttons");
         b1.classList.toggle("buttons"); */
-        const getButton = (getbutton.innerHTML =
-        `<button
+        const getButton = (getbutton.innerHTML = `<button
           class="buttons"
           type="button"
           id="button1"
@@ -128,7 +127,6 @@ function geoFindMe() {
         >
           宝を入手する
         </button>`);
-      }
         const Blo = (positions.innerHTML =
           "<div>モデルまでの距離" +
           pointDistance +
