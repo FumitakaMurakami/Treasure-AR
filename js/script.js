@@ -26,7 +26,8 @@ function run(id) {
   });
 }
 function treasureFound() {
-  run("button1");
+  /* run("button1"); */
+  alert("宝を入手しました！");
 }
 function getRandomArbitrary(min, max) {
   return Math.random() * (max - min) + min;
@@ -107,19 +108,29 @@ function geoFindMe() {
         console.log(b1);
         b1.classList.remove("buttons");
         b1.classList.toggle("after-buttons");
+        const Blo = (positions.innerHTML =
+          "<div>モデルまでの距離" +
+          pointDistance +
+          "m" +
+          "<br>宝に近づいています！</div>");
       } else {
         treasure.setAttribute("opacity", `1`);
         treasure.setAttribute("color", `black`);
         b1.classList.remove("after-buttons");
         b1.classList.toggle("buttons");
+        const Blo = (positions.innerHTML =
+          "<div>モデルまでの距離" +
+          pointDistance +
+          "m" +
+          "<br>宝を発見しました！</div>");
       }
     } else {
       treasure.setAttribute("opacity", `0`);
       b1.classList.remove("after-buttons");
       b1.classList.toggle("buttons");
+      const Blo = (positions.innerHTML =
+        "<div>モデルまでの距離" + pointDistance + "m" + "</div>");
     }
-    const Blo = (positions.innerHTML =
-      "<div>モデルまでの距離" + pointDistance + "m" + "</div>");
   }
 
   function error() {
