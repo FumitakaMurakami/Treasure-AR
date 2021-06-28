@@ -89,7 +89,7 @@ function geoFindMe() {
   const status = document.querySelector("#status");
   const positions = document.querySelector("#positions");
   const treasure = document.querySelector("#treasure");
-
+  const b1 = document.querySelector("#button1");
   function success(position) {
     let modellatitude = treasure.getAttribute("gps-entity-place").latitude;
     let modellongitude = treasure.getAttribute("gps-entity-place").longitude;
@@ -101,7 +101,6 @@ function geoFindMe() {
     );
     if (pointDistance <= 50) {
       if (pointDistance <= 20) {
-        const b1 = document.querySelector("#button1");
         treasure.setAttribute("opacity", `1`);
         treasure.setAttribute("color", `red`);
         console.log(b1);
