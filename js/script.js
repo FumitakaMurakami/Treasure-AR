@@ -109,14 +109,14 @@ function geoFindMe() {
         console.log(b1);
         /* b1.classList.remove("buttons");
         b1.classList.toggle("after-buttons"); */
-        const getButton = (getbutton.innerHTML = `<button
+        /* const getButton = (getbutton.innerHTML = `<button
           class="buttons"
           type="button"
           id="button1"
           onclick=" treasureFound()"
         >
           宝を入手する
-        </button>`);
+        </button>`); */
         const Blo = (positions.innerHTML =
           "<div>モデルまでの距離" +
           pointDistance +
