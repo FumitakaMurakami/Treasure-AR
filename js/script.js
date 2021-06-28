@@ -62,14 +62,14 @@ function geoSetup() {
 
     let treasurelatitude = latitude + randomlongitude;
     let treasurelongitude = longitude + randomlongitude;
-    /* treasure.setAttribute(
-      "gps-entity-place",
-      `latitude:${latitude}; longitude:${longitude};`
-    ); */
     treasure.setAttribute(
       "gps-entity-place",
-      `latitude:${treasurelatitude}; longitude:${treasurelongitude};`
+      `latitude:${latitude}; longitude:${longitude};`
     );
+    /* treasure.setAttribute(
+      "gps-entity-place",
+      `latitude:${treasurelatitude}; longitude:${treasurelongitude};`
+    ); */
 
     status.textContent = "";
   }
