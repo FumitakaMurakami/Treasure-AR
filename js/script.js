@@ -89,6 +89,7 @@ function geoSetup() {
 function geoFindMe() {
   const status = document.querySelector("#status");
   const positions = document.querySelector("#positions");
+  const getbutton = document.querySelector("#getbutton");
   const treasure = document.querySelector("#treasure");
   const b1 = document.querySelector("#button1");
   console.log(b1);
@@ -118,11 +119,21 @@ function geoFindMe() {
         treasure.setAttribute("color", `black`);
         b1.classList.remove("after-buttons");
         b1.classList.toggle("buttons");
-        /* const Blo = (positions.innerHTML =
+        const getButton = (getbutton.innerHTML =
+        `<button
+          class="buttons"
+          type="button"
+          id="button1"
+          onclick=" treasureFound()"
+        >
+          宝を入手する
+        </button>`);
+      }
+        const Blo = (positions.innerHTML =
           "<div>モデルまでの距離" +
           pointDistance +
           "m" +
-          "<br>宝を発見しました！</div>"); */
+          "<br>宝を発見しました！</div>");
       }
     } else {
       treasure.setAttribute("opacity", `0`);
