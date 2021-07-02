@@ -88,84 +88,106 @@ function geoSetup() {
     showMessage("");
   };
 
-  const error = () => {
-    showMessage("Unable to retrieve your location");
+  showMessage("Locating…");
+  navigator.geolocation.getCurrentPosition(success, () =>
+    showMessage("Unable to retrieve your location")
+  );
+}
+
+function getDistance(position, treasure) {
+  const { latitude: modellatitude, longitude: modellongitude } =
+    treasure.getAttribute("gps-entity-place");
+  console.log(modellatitude, modellongitude);
+  const { latitude, longitude } = position.coords;
+
+  const pointDistance = Math.round(
+    distance(modellatitude, modellongitude, latitude, longitude) * 1000
+  );
+  return pointDistance;
+}
+
+function buildButtonWhenFindTresure(isClear) {
+  const getbutton = document.querySelector("#getbutton");
+  if (isClear) {
+    getbutton.innerHTML = "";
+    return;
+  }
+  getbutton = document.createElement("button");
+  getbutton.id = "button1";
+  getbutton.setAttribute("class", "buttons");
+  getbutton.setAttribute("type", "button");
+  getbutton.addEventListener("click", treasureFound);
+  getbutton.textContent = "宝を入手する";
+}
+
+/**
+ * distanceType : "found" | "near" | "far"
+ */
+function buildPositionDisplay(distanceType, pointDistance) {
+  const positions = document.querySelector("#positions");
+
+  const message =
+    distanceType === "found"
+      ? "宝を発見しました！"
+      : distanceType === "near"
+      ? "宝に近づいています！"
+      : "";
+  positions.innerHTML = `<div>
+      モデルまでの距離
+      ${pointDistance} m
+      <br>${message}
+    </div>`;
+}
+
+/**
+ * 宝探しゲーム本編
+ */
+function geoFindMe() {
+  if (!navigator.geolocation) {
+    showMessage("Geolocation is not supported by your browser");
+  }
+
+  const treasure = document.querySelector("#a-treasure");
+
+  const success = (position) => {
+    // 宝箱との距離を取得
+    const pointDistance = getDistance(position, treasure);
+
+    if (pointDistance <= 20) {
+      treasure.setAttribute("opacity", `1`);
+      treasure.setAttribute("color", `red`);
+
+      // 宝箱を獲得するボタンの作成
+      buildButtonWhenFindTresure();
+
+      // 宝物との位置の表示
+      buildPositionDisplay("found", pointDistance);
+    } else if (pointDistance <= 50) {
+      treasure.setAttribute("opacity", `1`);
+      treasure.setAttribute("color", `black`);
+
+      // ボタンをクリア
+      buildButtonWhenFindTresure(true);
+
+      // 宝物との位置の表示
+      buildPositionDisplay("near", pointDistance);
+    } else {
+      treasure.setAttribute("opacity", `0`);
+
+      // ボタンをクリア
+      buildButtonWhenFindTresure(true);
+
+      // 宝物との位置の表示
+      buildPositionDisplay("far", pointDistance);
+    }
   };
 
   showMessage("Locating…");
-  navigator.geolocation.getCurrentPosition(success, error);
-}
 
-function geoFindMe() {
-  const status = document.querySelector("#status");
-  const positions = document.querySelector("#positions");
-  const getbutton = document.querySelector("#getbutton");
-  const treasure = document.querySelector("#a-treasure");
-  const b1 = document.querySelector("#button1");
-
-  console.log(b1);
-
-  function success(position) {
-    let modellatitude = treasure.getAttribute("gps-entity-place").latitude;
-    let modellongitude = treasure.getAttribute("gps-entity-place").longitude;
-    console.log(modellatitude, modellongitude);
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude;
-    const pointDistance = Math.round(
-      distance(modellatitude, modellongitude, latitude, longitude) * 1000
-    );
-    if (pointDistance <= 50) {
-      if (pointDistance <= 20) {
-        treasure.setAttribute("opacity", `1`);
-        treasure.setAttribute("color", `red`);
-        console.log(b1);
-        /* b1.classList.remove("buttons");
-        b1.classList.toggle("after-buttons"); */
-        const getButton = (getbutton.innerHTML = `<button
-          class="buttons"
-          type="button"
-          id="button1"
-          onclick=" treasureFound()"
-        >
-          宝を入手する
-        </button>`);
-        const Blo = (positions.innerHTML =
-          "<div>モデルまでの距離" +
-          pointDistance +
-          "m" +
-          "<br>宝を発見しました！</div>");
-      } else {
-        treasure.setAttribute("opacity", `1`);
-        treasure.setAttribute("color", `black`);
-        /* b1.classList.remove("after-buttons");
-        b1.classList.toggle("buttons"); */
-        const getButton = (getbutton.innerHTML = ``);
-        const Blo = (positions.innerHTML =
-          "<div>モデルまでの距離" +
-          pointDistance +
-          "m" +
-          "<br>宝に近づいています！</div>");
-      }
-    } else {
-      treasure.setAttribute("opacity", `0`);
-      /* b1.classList.remove("after-buttons");
-      b1.classList.toggle("buttons"); */
-      const getButton = (getbutton.innerHTML = ``);
-      const Blo = (positions.innerHTML =
-        "<div>モデルまでの距離" + pointDistance + "m" + "</div>");
-    }
-  }
-
-  function error() {
+  // ポジションを監視し続ける
+  navigator.geolocation.watchPosition(success, () => {
     showMessage("Unable to retrieve your location");
-  }
-
-  if (!navigator.geolocation) {
-    showMessage("Geolocation is not supported by your browser");
-  } else {
-    status.textContent = "Locating…";
-    navigator.geolocation.watchPosition(success, error);
-  }
+  });
 }
 
 window.addEventListener("load", (event) => {
