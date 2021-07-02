@@ -25,6 +25,7 @@ function run(id) {
     loop: 1,
   });
 }
+
 function treasureFound() {
   /* run("button1"); */
   alert("宝を入手しました！");
@@ -34,28 +35,40 @@ function getRandomArbitrary(min, max) {
 }
 
 function distance(lat1, lng1, lat2, lng2) {
-  if (lat1 != lat2 && lng1 != lng2) {
-    const R = Math.PI / 180;
-    lat1 *= R;
-    lng1 *= R;
-    lat2 *= R;
-    lng2 *= R;
-    return (
-      6371 *
-      Math.acos(
-        Math.cos(lat1) * Math.cos(lat2) * Math.cos(lng2 - lng1) +
-          Math.sin(lat1) * Math.sin(lat2)
-      )
-    );
-  } else {
-    return 0;
-  }
+  if (lat1 === lat2 || lng1 === lng2) return 0;
+
+  const R = Math.PI / 180;
+  lat1 *= R;
+  lng1 *= R;
+  lat2 *= R;
+  lng2 *= R;
+  return (
+    6371 *
+    Math.acos(
+      Math.cos(lat1) * Math.cos(lat2) * Math.cos(lng2 - lng1) +
+        Math.sin(lat1) * Math.sin(lat2)
+    )
+  );
 }
-function geoSetup() {
+
+function showMessage(message) {
   const status = document.querySelector("#status");
+  status.textContent = message;
+}
+
+/**
+ * 現在位置の取得と周辺への宝の配置
+ */
+function geoSetup() {
+  // Geolocation guard
+  if (!navigator.geolocation) {
+    showMessage("Geolocation is not supported by your browser");
+  }
+
   const positions = document.querySelector("#positions");
-  const treasure = document.querySelector("#treasure");
-  function success(position) {
+  const treasure = document.querySelector("#a-treasure");
+
+  const success = (position) => {
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
     randomlatitude = getRandomArbitrary(0.0005, 0.001);
@@ -63,36 +76,35 @@ function geoSetup() {
 
     let treasurelatitude = latitude + randomlongitude;
     let treasurelongitude = longitude + randomlongitude;
-    treasure.setAttribute(
-      "gps-entity-place",
-      `latitude:${latitude}; longitude:${longitude};`
-    );
     /* treasure.setAttribute(
       "gps-entity-place",
-      `latitude:${treasurelatitude}; longitude:${treasurelongitude};`
+      `latitude:${latitude}; longitude:${longitude};`
     ); */
+    treasure.setAttribute(
+      "gps-entity-place",
+      `latitude:${treasurelatitude}; longitude:${treasurelongitude};`
+    );
 
-    status.textContent = "";
-  }
+    showMessage("");
+  };
 
-  function error() {
-    status.textContent = "Unable to retrieve your location";
-  }
+  const error = () => {
+    showMessage("Unable to retrieve your location");
+  };
 
-  if (!navigator.geolocation) {
-    status.textContent = "Geolocation is not supported by your browser";
-  } else {
-    status.textContent = "Locating…";
-    navigator.geolocation.getCurrentPosition(success, error);
-  }
+  showMessage("Locating…");
+  navigator.geolocation.getCurrentPosition(success, error);
 }
+
 function geoFindMe() {
   const status = document.querySelector("#status");
   const positions = document.querySelector("#positions");
   const getbutton = document.querySelector("#getbutton");
-  const treasure = document.querySelector("#treasure");
+  const treasure = document.querySelector("#a-treasure");
   const b1 = document.querySelector("#button1");
+
   console.log(b1);
+
   function success(position) {
     let modellatitude = treasure.getAttribute("gps-entity-place").latitude;
     let modellongitude = treasure.getAttribute("gps-entity-place").longitude;
@@ -145,16 +157,17 @@ function geoFindMe() {
   }
 
   function error() {
-    status.textContent = "Unable to retrieve your location";
+    showMessage("Unable to retrieve your location");
   }
 
   if (!navigator.geolocation) {
-    status.textContent = "Geolocation is not supported by your browser";
+    showMessage("Geolocation is not supported by your browser");
   } else {
     status.textContent = "Locating…";
     navigator.geolocation.watchPosition(success, error);
   }
 }
+
 window.addEventListener("load", (event) => {
   geoSetup();
   geoFindMe();
