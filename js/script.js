@@ -69,8 +69,8 @@ function geoSetup() {
   const treasure = document.querySelector("#a-treasure");
 
   const success = (position) => {
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude;
+    const { latitude, longitude } = position.coords;
+
     randomlatitude = getRandomArbitrary(0.0005, 0.001);
     randomlongitude = getRandomArbitrary(0.0005, 0.001);
 
