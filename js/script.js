@@ -113,7 +113,7 @@ function buildButtonWhenFindTresure(isClear) {
     return;
   }
   /* const getbutton = document.createElement("button"); */
-  getbutton.id = "button1";
+  /* getbutton.id = "button1"; */
   getbutton.setAttribute("class", "buttons");
   getbutton.setAttribute("type", "button");
   getbutton.addEventListener("click", treasureFound);
