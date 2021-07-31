@@ -76,13 +76,22 @@
       embedded
       arjs="sourceType: webcam; debugUIEnabled: false;"
     >
-      <a-box
+      <a-assets>
+        <a-asset-item
+          id="treasurebox"
+          src="/model/le_takarabako.glb"
+        ></a-asset-item>
+        <a-asset-item
+          id="tree"
+          src="/model/le_takarabako_open.glb"
+        ></a-asset-item>
+      </a-assets>
+      <a-entity
         id="a-treasure"
-        color="red"
-        scale="1 1 1"
         look-at="&#91;gps-camera&#93;"
+        gltf-model="#treasurebox"
         moveLink
-      ></a-box>
+      ></a-entity>
       <a-camera
         gps-camera="maxDistance:100"
         cursor="rayOrigin: mouse; fuse:false"
